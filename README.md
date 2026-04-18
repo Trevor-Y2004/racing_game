@@ -1,6 +1,13 @@
 # racing_game
 Racing Game (Unity 6000.4.2f1)
 
+Game Name: Burnout Boulevard
+
+Team Members:
+Trevor Young
+Diego Sandoval
+Micah
+
 Current State 
  - One driveable Car
  - Camera System that Follows car
@@ -22,3 +29,15 @@ Gameplay Mechanics that need implementation
 
 Current Gameplay
  - https://youtu.be/dtJj-KRxrvc
+
+ Individual Goals:
+ Trevor:
+  - Implement Hazards and Power ups
+
+ Diego:
+  - Refine the cars mechanics and refine the track
+
+ Micah:
+  - Implement UI elements
+
+
