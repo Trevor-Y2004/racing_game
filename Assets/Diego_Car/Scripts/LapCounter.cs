@@ -10,17 +10,29 @@ public class LapCounter : MonoBehaviour
     private int currentLap = 1;
     private float timer = 0f;
     private bool raceFinished = false;
+    private bool raceStarted = false;
+
+    void Start()
+    {
+        lapText.text = "";
+        timerText.text = "";
+    }
+
+    public void StartRace()
+    {
+        raceStarted = true;
+        lapText.text = "Lap 1/" + totalLaps;
+    }
 
     void Update()
     {
-        if (!raceFinished)
-        {
-            timer += Time.deltaTime;
-            int minutes = (int)(timer / 60f);
-            int seconds = (int)(timer % 60f);
-            int milliseconds = (int)((timer * 100f) % 100f);
-            timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
-        }
+        if (!raceStarted || raceFinished) return;
+
+        timer += Time.deltaTime;
+        int minutes = (int)(timer / 60f);
+        int seconds = (int)(timer % 60f);
+        int milliseconds = (int)((timer * 100f) % 100f);
+        timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
         lapText.text = "Lap " + currentLap + "/" + totalLaps;
     }
 
