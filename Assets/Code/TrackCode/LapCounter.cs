@@ -10,7 +10,7 @@ public class LapCounter : MonoBehaviour
     private int currentLap = 1;
     private float timer = 0f;
     private bool raceFinished = false;
-    private bool raceStarted = false;
+    public bool raceStarted = false;
 
     void Start()
     {

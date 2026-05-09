@@ -126,3 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpeedBoost
   boostForce: 8000
+  rotateSpeed: 90
+  bobHeight: 0.5
+  bobSpeed: 4

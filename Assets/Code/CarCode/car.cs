@@ -8,11 +8,19 @@ public class car : MonoBehaviour
     public float drivespeed, steerspeed;
     public TextMeshProUGUI speedText;
     public bool isGliding = false;
+    public LapCounter lapCounter;
+    public Camera carCamera;
+    public float normalFOV = 60f;
+    public float boostFOV = 80f;
+    public float fovSpeed = 5f;
+    private float targetFOV;
     float horizontalInput, verticalInput;
 
     void Start()
     {
         rigid.centerOfMass = new Vector3(0, -0.3f, 0);
+        speedText.text = "";
+        targetFOV = normalFOV;
     }
 
     void Update()
@@ -20,8 +28,24 @@ public class car : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        float speed = rigid.linearVelocity.magnitude * 2.237f;
-        speedText.text = Mathf.RoundToInt(speed) + " mph";
+        if (lapCounter.raceStarted)
+        {
+            float speed = rigid.linearVelocity.magnitude * 2.237f;
+            speedText.text = Mathf.RoundToInt(speed) + " mph";
+        }
+
+        carCamera.fieldOfView = Mathf.Lerp(carCamera.fieldOfView, targetFOV, fovSpeed * Time.deltaTime);
+    }
+
+    public void TriggerBoostFOV()
+    {
+        targetFOV = boostFOV;
+        Invoke("ResetFOV", 1f);
+    }
+
+    void ResetFOV()
+    {
+        targetFOV = normalFOV;
     }
 
     void FixedUpdate()
