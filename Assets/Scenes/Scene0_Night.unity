@@ -19962,56 +19962,6 @@ PhysicsMaterial:
   m_Bounciness: 0
   m_FrictionCombine: 0
   m_BounceCombine: 0
---- !u!1 &706810908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 706810910}
-  - component: {fileID: 706810909}
-  m_Layer: 0
-  m_Name: MoonController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &706810909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706810908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6037ac9cc9f3cc888508b7caa05016, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CreateMoon
-  moonMaterial: {fileID: 2100000, guid: 7729c16ceefa7d8d5a2e2b01e733ebe3, type: 2}
-  moonPosition: {x: 0, y: 25, z: 60}
-  moonSize: 25
-  lightIntensity: 0.35
-  lightColor: {r: 1, g: 0.6509804, b: 0.85131186, a: 1}
-  lightRotation: {x: 50, y: -30, z: 0}
---- !u!4 &706810910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706810908}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1092.9786, y: 0, z: -945.03345}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!134 &714677861
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -50083,6 +50033,63 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1064330187}
+--- !u!1001 &7226343155075947595
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1092.9786
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -945.03345
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849954350187324006, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_Name
+      value: MoonController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -50105,4 +50112,4 @@ SceneRoots:
   - {fileID: 403248037}
   - {fileID: 1455362357}
   - {fileID: 696119415}
-  - {fileID: 706810910}
+  - {fileID: 7226343155075947595}
