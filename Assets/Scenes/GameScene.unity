@@ -15934,35 +15934,18 @@ PhysicsMaterial:
   m_Bounciness: 0
   m_FrictionCombine: 0
   m_BounceCombine: 0
---- !u!1 &476249390
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 476249392}
-  - component: {fileID: 476249391}
-  m_Layer: 0
-  m_Name: LapCounter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &476249391
+--- !u!114 &476249391 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6376611991395672247, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+  m_PrefabInstance: {fileID: 3388159782137805159}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 476249390}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80619ad511620cf42935d0ebf3adff71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LapCounter
+<<<<<<< Updated upstream
   totalLaps: 3
   lapText: {fileID: 1336041316}
   timerText: {fileID: 1981148490}
@@ -15982,6 +15965,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!134 &476769241
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -23605,6 +23590,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938379631}
   m_Mesh: {fileID: 864223028}
+<<<<<<< Updated upstream
 --- !u!1 &941746702
 GameObject:
   m_ObjectHideFlags: 0
@@ -23717,6 +23703,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 908410829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!134 &942098116
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -36250,6 +36238,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 824799312}
+<<<<<<< Updated upstream
 --- !u!1 &1485989388
 GameObject:
   m_ObjectHideFlags: 0
@@ -36394,6 +36383,8 @@ MonoBehaviour:
   lapCounter: {fileID: 476249391}
   countdownText: {fileID: 1443279519}
   carController: {fileID: 1431226603}
+=======
+>>>>>>> Stashed changes
 --- !u!43 &1495074567
 Mesh:
   m_ObjectHideFlags: 0
@@ -44744,73 +44735,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807304458}
   m_Mesh: {fileID: 2028372188}
---- !u!1 &1808799481
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1808799484}
-  - component: {fileID: 1808799483}
-  - component: {fileID: 1808799482}
-  m_Layer: 0
-  m_Name: FinishLine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1808799482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808799481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7a5ced66b997d647b19c74315f63724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LapTrigger
-  lapCounter: {fileID: 476249391}
---- !u!65 &1808799483
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808799481}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 80, y: 10, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &1808799484
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808799481}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.013089582, z: 0, w: 0.99991435}
-  m_LocalPosition: {x: 67, y: 10.3, z: 360.0516}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -1.5, z: 0}
 --- !u!43 &1820114077
 Mesh:
   m_ObjectHideFlags: 0
@@ -47490,6 +47414,7 @@ PhysicsMaterial:
   m_Bounciness: 0
   m_FrictionCombine: 0
   m_BounceCombine: 0
+<<<<<<< Updated upstream
 --- !u!1 &1998000529
 GameObject:
   m_ObjectHideFlags: 0
@@ -47604,6 +47529,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 908410829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &2004278101
 GameObject:
   m_ObjectHideFlags: 0
@@ -50114,6 +50041,204 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1064330187}
+<<<<<<< Updated upstream
+=======
+--- !u!1001 &836872644022521393
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1006992791704468628, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_Name
+      value: StartingLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 60.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 335.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236313293183053008, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187396348590110925, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: lapCounter
+      value: 
+      objectReference: {fileID: 476249391}
+    - target: {fileID: 8187396348590110925, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: carController
+      value: 
+      objectReference: {fileID: 1431226603}
+    - target: {fileID: 8187396348590110925, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+      propertyPath: countdownText
+      value: 
+      objectReference: {fileID: 1443279519}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c509934a14a2720d3870cd4b6ad159b0, type: 3}
+--- !u!1001 &3388159782137805159
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3907407354813793398, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_Name
+      value: FinishLine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376611991395672247, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: lapText
+      value: 
+      objectReference: {fileID: 1336041316}
+    - target: {fileID: 6376611991395672247, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 1981148490}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 67
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 335.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549341707780333262, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8938007623660791863, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58c0fbb73db5bb63fa70153e175d25eb, type: 3}
+--- !u!1001 &7226343155075947595
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1092.9786
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -945.03345
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182094571452829237, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849954350187324006, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+      propertyPath: m_Name
+      value: MoonController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
+>>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -50123,16 +50248,24 @@ SceneRoots:
   - {fileID: 1287338703}
   - {fileID: 1277144198}
   - {fileID: 1870369067}
-  - {fileID: 1808799484}
-  - {fileID: 476249392}
   - {fileID: 53386618}
   - {fileID: 1784100995}
+<<<<<<< Updated upstream
+=======
+  - {fileID: 836872644022521393}
+>>>>>>> Stashed changes
   - {fileID: 351628521}
   - {fileID: 974825996}
   - {fileID: 1936174671}
   - {fileID: 403248037}
   - {fileID: 1455362357}
+<<<<<<< Updated upstream
   - {fileID: 706810910}
   - {fileID: 908410829}
   - {fileID: 2103374835}
   - {fileID: 1523304993}
+=======
+  - {fileID: 696119415}
+  - {fileID: 7226343155075947595}
+  - {fileID: 3388159782137805159}
+>>>>>>> Stashed changes
