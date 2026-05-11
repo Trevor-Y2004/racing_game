@@ -11281,6 +11281,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163401942}
   m_Mesh: {fileID: 587831173}
+--- !u!1 &168840845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168840846}
+  m_Layer: 0
+  m_Name: DinoWayPoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &168840846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168840845}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 65.00281, y: 11.28171, z: 266.12573}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &169405947
 Mesh:
   m_ObjectHideFlags: 0
@@ -15945,25 +15976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80619ad511620cf42935d0ebf3adff71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LapCounter
-  totalLaps: 3
-  lapText: {fileID: 1336041316}
-  timerText: {fileID: 1981148490}
-  raceStarted: 0
---- !u!4 &476249392
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 476249390}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 64.89494, y: 10.31625, z: 351.66647}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!134 &476769241
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -19899,7 +19911,7 @@ MonoBehaviour:
   moonSize: 25
   lightIntensity: 0.35
   lightColor: {r: 1, g: 0.6509804, b: 0.85131186, a: 1}
-  lightRotation: {x: 50, y: -30, z: 0}
+  lightRotation: {x: -100, y: -30, z: 0}
 --- !u!4 &706810910
 Transform:
   m_ObjectHideFlags: 0
@@ -22891,6 +22903,78 @@ PhysicsMaterial:
   m_Bounciness: 0
   m_FrictionCombine: 0
   m_BounceCombine: 0
+--- !u!1 &905668459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2057230003193109971, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+  m_PrefabInstance: {fileID: 1634773146}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &905668464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905668459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991b0fd0cc2569b4a9771d680c54fa90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DinoAI
+  waypoints:
+  - {fileID: 168840846}
+  - {fileID: 1882918598}
+  moveSpeed: 5
+  rotateSpeed: 5
+--- !u!136 &905668465
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905668459}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &905668466
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905668459}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!134 &907318360
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -33108,7 +33192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: 500}
+  m_AnchoredPosition: {x: 400, y: 218}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1336041316
@@ -39895,6 +39979,76 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1001 &1634773146
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2057230003193109971, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_Name
+      value: Raptor_Animated_FBX_5K_Sandmale
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 64.19342
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.288259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 267.01395
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087189030913126336, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926346251212653242, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5bec384a71ced6848b10b6486ea7141f, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2057230003193109971, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 905668464}
+    - targetCorrespondingSourceObject: {fileID: 2057230003193109971, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 905668466}
+    - targetCorrespondingSourceObject: {fileID: 2057230003193109971, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 905668465}
+  m_SourcePrefab: {fileID: 100100000, guid: 1489e285bd7f7b149af4e9737cd26a95, type: 3}
 --- !u!43 &1637555542
 Mesh:
   m_ObjectHideFlags: 0
@@ -45638,6 +45792,37 @@ PhysicsMaterial:
   m_Bounciness: 0
   m_FrictionCombine: 0
   m_BounceCombine: 0
+--- !u!1 &1882918597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1882918598}
+  m_Layer: 0
+  m_Name: DinoWayPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1882918598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882918597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 65.00281, y: 11.28171, z: 102}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1895548617
 Mesh:
   m_ObjectHideFlags: 0
@@ -50245,6 +50430,8 @@ SceneRoots:
   - {fileID: 908410829}
   - {fileID: 2103374835}
   - {fileID: 1523304993}
-  - {fileID: 696119415}
   - {fileID: 7226343155075947595}
   - {fileID: 3388159782137805159}
+  - {fileID: 1634773146}
+  - {fileID: 168840846}
+  - {fileID: 1882918598}
