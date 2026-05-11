@@ -15945,7 +15945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80619ad511620cf42935d0ebf3adff71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LapCounter
-<<<<<<< Updated upstream
   totalLaps: 3
   lapText: {fileID: 1336041316}
   timerText: {fileID: 1981148490}
@@ -15965,8 +15964,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> Stashed changes
 --- !u!134 &476769241
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -23590,7 +23587,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938379631}
   m_Mesh: {fileID: 864223028}
-<<<<<<< Updated upstream
 --- !u!1 &941746702
 GameObject:
   m_ObjectHideFlags: 0
@@ -23703,8 +23699,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 908410829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> Stashed changes
 --- !u!134 &942098116
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -36238,7 +36232,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 824799312}
-<<<<<<< Updated upstream
 --- !u!1 &1485989388
 GameObject:
   m_ObjectHideFlags: 0
@@ -36383,8 +36376,6 @@ MonoBehaviour:
   lapCounter: {fileID: 476249391}
   countdownText: {fileID: 1443279519}
   carController: {fileID: 1431226603}
-=======
->>>>>>> Stashed changes
 --- !u!43 &1495074567
 Mesh:
   m_ObjectHideFlags: 0
@@ -47414,7 +47405,6 @@ PhysicsMaterial:
   m_Bounciness: 0
   m_FrictionCombine: 0
   m_BounceCombine: 0
-<<<<<<< Updated upstream
 --- !u!1 &1998000529
 GameObject:
   m_ObjectHideFlags: 0
@@ -47529,8 +47519,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 908410829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> Stashed changes
 --- !u!1 &2004278101
 GameObject:
   m_ObjectHideFlags: 0
@@ -50041,8 +50029,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1064330187}
-<<<<<<< Updated upstream
-=======
 --- !u!1001 &836872644022521393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50238,7 +50224,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99ac3c3162568355f9299d7601e62576, type: 3}
->>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -50250,22 +50235,16 @@ SceneRoots:
   - {fileID: 1870369067}
   - {fileID: 53386618}
   - {fileID: 1784100995}
-<<<<<<< Updated upstream
-=======
   - {fileID: 836872644022521393}
->>>>>>> Stashed changes
   - {fileID: 351628521}
   - {fileID: 974825996}
   - {fileID: 1936174671}
   - {fileID: 403248037}
   - {fileID: 1455362357}
-<<<<<<< Updated upstream
   - {fileID: 706810910}
   - {fileID: 908410829}
   - {fileID: 2103374835}
   - {fileID: 1523304993}
-=======
   - {fileID: 696119415}
   - {fileID: 7226343155075947595}
   - {fileID: 3388159782137805159}
->>>>>>> Stashed changes
