@@ -8,7 +8,24 @@ public class Launch : MonoBehaviour
     public float forwardForce = 500f;
     public float airSteerForce = 500f;
     public float glideDuration = 3f;
+    public float rotateSpeed = 90f;
+    public float bobHeight = 0.3f;
+    public float bobSpeed = 2f;
+
     private bool used = false;
+    private Vector3 startPosition;
+
+    void Start()
+    {
+        startPosition = transform.position;
+    }
+
+    void Update()
+    {
+        transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+        float newY = startPosition.y + Mathf.Sin(Time.time * bobSpeed) * bobHeight;
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,20 +45,21 @@ public class Launch : MonoBehaviour
 
     IEnumerator Glide(Rigidbody rb)
     {
+        car carScript = rb.GetComponent<car>();
+        if (carScript != null) carScript.isGliding = true;
+
         float timer = 0f;
         while (timer < glideDuration)
         {
-            // Gentle descent
             rb.AddForce(Vector3.up * glideForce, ForceMode.Force);
-            // Keep pushing forward
             rb.AddForce(rb.transform.forward * forwardForce, ForceMode.Force);
-            // Air steering
             float horizontal = Input.GetAxis("Horizontal");
             rb.AddTorque(Vector3.up * horizontal * airSteerForce, ForceMode.Force);
-
             timer += Time.deltaTime;
             yield return null;
         }
+
+        if (carScript != null) carScript.isGliding = false;
     }
 
     void Respawn()
