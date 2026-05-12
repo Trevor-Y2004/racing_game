@@ -12832,13 +12832,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2663483, y: 0.000002800175, z: -0.0000007543454, w: 0.9638769}
-  m_LocalPosition: {x: 0.34, y: 6.28, z: -9.96}
+  m_LocalRotation: {x: 0.07378721, y: -0.0037195976, z: -0.0018694268, w: 0.9972654}
+  m_LocalPosition: {x: 0.3200183, y: 3.6099997, z: -9.400005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1431226602}
-  m_LocalEulerAnglesHint: {x: 30.894, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 8.462, y: -0.446, z: -0.248}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43281,13 +43281,29 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d8618c21dc9684c14bdd5de16d7b141c, type: 2}
+    - target: {fileID: 4555959842222911657, guid: 102683eae8d0b468989dcab6932edbbe, type: 3}
+      propertyPath: drivespeed
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555959842222911657, guid: 102683eae8d0b468989dcab6932edbbe, type: 3}
+      propertyPath: steerspeed
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555959842222911657, guid: 102683eae8d0b468989dcab6932edbbe, type: 3}
+      propertyPath: driftSteerMultiplier
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555959842222911657, guid: 102683eae8d0b468989dcab6932edbbe, type: 3}
+      propertyPath: driftSidewaysStiffness
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5921788888382140671, guid: 102683eae8d0b468989dcab6932edbbe, type: 3}
       propertyPath: m_Mass
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5921788888382140671, guid: 102683eae8d0b468989dcab6932edbbe, type: 3}
       propertyPath: m_AngularDamping
-      value: 0.15
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7121738184304323997, guid: 102683eae8d0b468989dcab6932edbbe, type: 3}
       propertyPath: m_LocalPosition.x

@@ -4,15 +4,18 @@ public class wheel : MonoBehaviour
 {
     public WheelCollider wheelCollider;
     public Transform wheelMesh;
-    public bool wheelTurn;
 
-    // Update is called once per frame
+    // Change this in the Inspector if the wheel spins the wrong way
+    public Vector3 rotationOffset = new Vector3(0, 0, 90);
+
     void Update()
     {
-        if(wheelTurn == true)
-        {
-            wheelMesh.localEulerAngles = new Vector3(wheelMesh.localEulerAngles.x, wheelCollider.steerAngle - wheelMesh.localEulerAngles.z, wheelMesh.localEulerAngles.z);
-        }
-        wheelMesh.Rotate(wheelCollider.rpm / 60 * 360 * Time.deltaTime, 0, 0);
+        Vector3 position;
+        Quaternion rotation;
+
+        wheelCollider.GetWorldPose(out position, out rotation);
+
+        wheelMesh.position = position;
+        wheelMesh.rotation = rotation * Quaternion.Euler(rotationOffset);
     }
 }
