@@ -7,6 +7,10 @@ public class LapCounter : MonoBehaviour
     public TextMeshProUGUI lapText;
     public TextMeshProUGUI timerText;
 
+    public RaceManager raceManager;
+    public GameObject gameplayUI;
+    public string racerName = "Player";
+
     private int currentLap = 1;
     private float timer = 0f;
     private bool raceFinished = false;
@@ -29,6 +33,11 @@ public class LapCounter : MonoBehaviour
 
     void Update()
     {
+        if (raceManager != null)
+        {
+            raceManager.UpdateRacer(racerName, currentLap, timer, raceFinished, totalLaps);
+        }
+
         if (!raceStarted || raceFinished) return;
 
         timer += Time.deltaTime;
@@ -65,6 +74,15 @@ public class LapCounter : MonoBehaviour
         {
             raceFinished = true;
             lapText.text = "Finished!";
+
+            if (gameplayUI != null)
+                gameplayUI.SetActive(false);
+
+            if (raceManager != null)
+            {
+                raceManager.UpdateRacer(racerName, currentLap, timer, raceFinished, totalLaps);
+                raceManager.ShowLeaderboard();
+            }
         }
         else
         {

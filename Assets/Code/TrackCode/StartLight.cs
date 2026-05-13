@@ -86,15 +86,22 @@ public class StartLight : MonoBehaviour
 
         SetCarsEnabled(true);
 
-        // 🔥 START LAP COUNTERS ON ALL CARS
-        foreach (CarMotor car in carControllers)
+        foreach (CarMotor carController in carControllers)
         {
-            if (car != null)
+            if (carController != null)
             {
-                LapCounter lap = car.GetComponent<LapCounter>();
+                // Player
+                LapCounter lap = carController.GetComponent<LapCounter>();
                 if (lap != null)
                 {
                     lap.StartRace();
+                }
+
+                // AI
+                AILapCounter aiLap = carController.GetComponent<AILapCounter>();
+                if (aiLap != null)
+                {
+                    aiLap.StartRace();
                 }
             }
         }

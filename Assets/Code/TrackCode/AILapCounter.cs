@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class AILapCounter : MonoBehaviour
 {
+    public RaceManager raceManager;
+    public string racerName = "AI Racer";
+    private float timer = 0f;
     public int totalLaps = 3;
 
     private int currentLap = 1;
@@ -18,6 +21,19 @@ public class AILapCounter : MonoBehaviour
         currentLap = 1;
         raceFinished = false;
         passedCheckpoint = false;
+    }
+
+    void Update()
+    {
+        if (raceStarted && !raceFinished)
+        {
+            timer += Time.deltaTime;
+        }
+
+        if (raceManager != null)
+        {
+            raceManager.UpdateRacer(racerName, currentLap, timer, raceFinished, totalLaps);
+        }
     }
 
     public void HitCheckpoint()
@@ -44,6 +60,11 @@ public class AILapCounter : MonoBehaviour
         {
             raceFinished = true;
             Debug.Log(gameObject.name + " finished the race!");
+
+            if (raceManager != null)
+            {
+                raceManager.UpdateRacer(racerName, currentLap, timer, raceFinished, totalLaps);
+            }
         }
         else
         {
