@@ -28,7 +28,7 @@ public class LapCounter : MonoBehaviour
     public void StartRace()
     {
         raceStarted = true;
-        lapText.text = "Lap 1/" + totalLaps;
+        lapText.text = "Lap: 1/" + totalLaps;
     }
 
     void Update()
