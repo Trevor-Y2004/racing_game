@@ -5,10 +5,10 @@ public class car : MonoBehaviour
 {
     public Rigidbody rigid;
 
-    public WheelCollider wheel1; // Front Left
-    public WheelCollider wheel2; // Front Right
-    public WheelCollider wheel3; // Back Left
-    public WheelCollider wheel4; // Back Right
+    public WheelCollider wheel1; //front Left
+    public WheelCollider wheel2; //front right
+    public WheelCollider wheel3; //back left
+    public WheelCollider wheel4; //back right
 
     public float drivespeed = 1200f;
     public float steerspeed = 55f;
@@ -35,9 +35,12 @@ public class car : MonoBehaviour
 
     void Start()
     {
-        rigid.centerOfMass = new Vector3(0, -0.3f, 0);
+        if (rigid != null)
+            rigid.centerOfMass = new Vector3(0, -0.3f, 0);
 
-        speedText.text = "";
+        if (speedText != null)
+            speedText.text = "";
+
         targetFOV = normalFOV;
     }
 
@@ -46,13 +49,16 @@ public class car : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (lapCounter.raceStarted)
+        if (lapCounter != null && lapCounter.raceStarted && rigid != null && speedText != null)
         {
             float speed = rigid.linearVelocity.magnitude * 2.237f;
             speedText.text = Mathf.RoundToInt(speed) + " mph";
         }
 
-        carCamera.fieldOfView = Mathf.Lerp(carCamera.fieldOfView, targetFOV, fovSpeed * Time.deltaTime);
+        if (carCamera != null)
+        {
+            carCamera.fieldOfView = Mathf.Lerp(carCamera.fieldOfView, targetFOV, fovSpeed * Time.deltaTime);
+        }
     }
 
     public void TriggerBoostFOV()
@@ -68,6 +74,9 @@ public class car : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (rigid == null || wheel1 == null || wheel2 == null || wheel3 == null || wheel4 == null)
+            return;
+
         bool drifting = Input.GetKey(driftKey);
 
         float motor = verticalInput * drivespeed;
@@ -134,6 +143,9 @@ public class car : MonoBehaviour
 
     void SetSidewaysStiffness(WheelCollider wheel, float stiffness)
     {
+        if (wheel == null)
+            return;
+
         WheelFrictionCurve sidewaysFriction = wheel.sidewaysFriction;
         sidewaysFriction.stiffness = stiffness;
         wheel.sidewaysFriction = sidewaysFriction;
