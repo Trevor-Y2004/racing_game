@@ -260,17 +260,34 @@ public class CarMotor : MonoBehaviour
 
     void HandleDriftSparks(bool drifting)
     {
-        float leftSlip = GetWheelSlip(wheel3);
-        float rightSlip = GetWheelSlip(wheel4);
+        bool shouldSmoke = drifting && Mathf.Abs(horizontalInput) > 0.1f && rigid.linearVelocity.magnitude > 5f;
 
-        float strongestSlip = Mathf.Max(leftSlip, rightSlip);
+        if (shouldSmoke)
+        {
+            if(driftSmokeLeft != null && !driftSmokeLeft.isPlaying)
+                driftSmokeLeft.Play();
+            if(driftSmokeRight != null && !driftSmokeRight.isPlaying)
+                driftSmokeRight.Play();
+        }
+        else
+        {
+            if (driftSmokeLeft != null && driftSmokeLeft.isPlaying)
+                driftSmokeLeft.Stop();
+            if (driftSmokeRight != null && driftSmokeRight.isPlaying)
+                driftSmokeRight.Stop();
+        }
+        // float leftSlip = GetWheelSlip(wheel3);
+        // float rightSlip = GetWheelSlip(wheel4);
 
-        float sparkStrength = Mathf.Clamp01((strongestSlip - driftSlipThreshold) * 4f);
+        // float strongestSlip = Mathf.Max(leftSlip, rightSlip);
 
-        bool shouldSpark = drifting && sparkStrength > 0.05f;
+        // float sparkStrength = Mathf.Clamp01((strongestSlip - driftSlipThreshold) * 4f);
 
-        UpdateSparkParticle(driftSmokeLeft, shouldSpark, sparkStrength);
-        UpdateSparkParticle(driftSmokeRight, shouldSpark, sparkStrength);
+        // bool shouldSpark = drifting && sparkStrength > 0.05f;
+
+        // UpdateSparkParticle(driftSmokeLeft, shouldSpark, sparkStrength);
+        // UpdateSparkParticle(driftSmokeRight, shouldSpark, sparkStrength);
+
     }
 
     void UpdateSparkParticle(ParticleSystem sparkSystem, bool shouldSpark, float strength)
