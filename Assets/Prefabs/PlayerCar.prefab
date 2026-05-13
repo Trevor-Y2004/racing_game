@@ -524,6 +524,7 @@ GameObject:
   - component: {fileID: 2324783635653312177}
   - component: {fileID: 3227833903236752451}
   - component: {fileID: 8523563479990193053}
+  - component: {fileID: 96738900124282980}
   m_Layer: 0
   m_Name: PlayerCar
   m_TagString: Player
@@ -640,6 +641,22 @@ MonoBehaviour:
   driftSmokeLeft: {fileID: 7829765041066327065}
   driftSmokeRight: {fileID: 7829765041066327065}
   driftSlipThreshold: 0.3
+--- !u!114 &96738900124282980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446732242325032799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80619ad511620cf42935d0ebf3adff71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LapCounter
+  totalLaps: 3
+  lapText: {fileID: 0}
+  timerText: {fileID: 0}
+  raceStarted: 0
 --- !u!1 &3532579018580113579
 GameObject:
   m_ObjectHideFlags: 0
@@ -5762,7 +5779,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2fab5b39a3e17a823ba3ead5ec91a4ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

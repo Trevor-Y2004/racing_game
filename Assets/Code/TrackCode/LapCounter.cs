@@ -12,6 +12,9 @@ public class LapCounter : MonoBehaviour
     private bool raceFinished = false;
     public bool raceStarted = false;
 
+    // This becomes true only after the player hits the checkpoint
+    private bool passedCheckpoint = false;
+
     void Start()
     {
         lapText.text = "";
@@ -29,16 +32,35 @@ public class LapCounter : MonoBehaviour
         if (!raceStarted || raceFinished) return;
 
         timer += Time.deltaTime;
+
         int minutes = (int)(timer / 60f);
         int seconds = (int)(timer % 60f);
         int milliseconds = (int)((timer * 100f) % 100f);
+
         timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
         lapText.text = "Lap " + currentLap + "/" + totalLaps;
     }
 
+    public void HitCheckpoint()
+    {
+        if (!raceStarted || raceFinished) return;
+
+        passedCheckpoint = true;
+        Debug.Log("Checkpoint reached");
+    }
+
     public void CompleteLap()
     {
-        if (raceFinished) return;
+        if (!raceStarted || raceFinished) return;
+
+        if (!passedCheckpoint)
+        {
+            Debug.Log("You must hit the checkpoint before completing a lap.");
+            return;
+        }
+
+        passedCheckpoint = false;
+
         if (currentLap >= totalLaps)
         {
             raceFinished = true;

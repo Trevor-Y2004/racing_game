@@ -4,7 +4,6 @@ using TMPro;
 public class StartLight : MonoBehaviour
 {
     public Light startLight;
-    public LapCounter lapCounter;
     public TextMeshProUGUI countdownText;
 
     public CarMotor[] carControllers;
@@ -87,7 +86,18 @@ public class StartLight : MonoBehaviour
 
         SetCarsEnabled(true);
 
-        lapCounter.StartRace();
+        // 🔥 START LAP COUNTERS ON ALL CARS
+        foreach (CarMotor car in carControllers)
+        {
+            if (car != null)
+            {
+                LapCounter lap = car.GetComponent<LapCounter>();
+                if (lap != null)
+                {
+                    lap.StartRace();
+                }
+            }
+        }
 
         Invoke(nameof(ClearText), 1f);
     }

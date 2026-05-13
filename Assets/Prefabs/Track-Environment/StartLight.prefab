@@ -402,9 +402,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartLight
   startLight: {fileID: 3195511635144478641}
-  lapCounter: {fileID: 0}
   countdownText: {fileID: 0}
-  carController: {fileID: 0}
+  carControllers:
+  - {fileID: 0}
+  - {fileID: 0}
+  audioSource: {fileID: 8600275882058819556}
+  beepLow: {fileID: 8300000, guid: 6ddd985c97171804795cad38cd30542c, type: 3}
+  beepHigh: {fileID: 8300000, guid: e5df0f973e967914680e07e8c5ca6312, type: 3}
 --- !u!82 &8600275882058819556
 AudioSource:
   m_ObjectHideFlags: 0

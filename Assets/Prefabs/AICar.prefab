@@ -737,9 +737,10 @@ GameObject:
   - component: {fileID: -4075212718699724577}
   - component: {fileID: -2168025949657389067}
   - component: {fileID: -4677854272777713977}
+  - component: {fileID: 8096465992908464374}
   m_Layer: 0
   m_Name: AICar
-  m_TagString: Player
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -872,6 +873,19 @@ MonoBehaviour:
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &8096465992908464374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5669469396397401785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed12b6373cee80d58e4ea40f5268d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AILapCounter
+  totalLaps: 3
 --- !u!1 &5687064438719730045
 GameObject:
   m_ObjectHideFlags: 0
