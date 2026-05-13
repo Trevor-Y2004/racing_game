@@ -13,7 +13,7 @@ public class CarMotor : MonoBehaviour
     public WheelCollider wheel4;
 
     [Header("Driving")]
-    public float drivespeed = 1200f;
+    public float drivespeed = 2500f;
     public float steerspeed = 55f;
 
     [Header("UI / Camera")]
@@ -28,24 +28,33 @@ public class CarMotor : MonoBehaviour
     public bool isGliding = false;
     public float normalSidewaysStiffness = 1f;
     public float driftSidewaysStiffness = 0.4f;
-    public float driftSteerMultiplier = 1.1f;
+    public float driftSteerMultiplier = 0.4f;
     public float minSpeedForDriftBoost = 8f;
     public float normalTurnDamping = 0.85f;
     public float driftTurnAssist = 0.8f;
 
     [Header("Drift Momentum")]
-    public float lateralGripDuringDrift = 0.94f;
-    public float forwardMomentumDuringDrift = 1.005f;
+    public float lateralGripDuringDrift = 0.96f;
+    public float forwardMomentumDuringDrift = 1.002f;
 
     [Header("Drift Visuals")]
     public float driftVisualTilt = 10f;
     public float driftVisualYaw = 8f;
     public float driftVisualSpeed = 6f;
 
-    [Header("Drift Smoke")]
+
+
+    [Header("Drift Sparks")]
     public ParticleSystem driftSmokeLeft;
     public ParticleSystem driftSmokeRight;
-    public float driftSlipThreshold = 0.3f;
+    public float driftSlipThreshold = 0.18f;
+    public float maxSparkEmission = 150f;
+
+    public Color weakDriftColor = Color.cyan;
+    public Color mediumDriftColor = new Color(1f, 0.45f, 0f);
+    public Color strongDriftColor = new Color(1f, 0f, 1f);
+
+    private float driftTimer = 0f;
 
     [Header("Braking")]
     public float brakeForce = 600f;
@@ -173,7 +182,16 @@ public class CarMotor : MonoBehaviour
             rigid.angularVelocity = angularVel;
         }
 
-        HandleDriftSmoke(drifting);
+        if (driftInput && Mathf.Abs(horizontalInput) > 0.1f)
+        {
+            driftTimer += Time.fixedDeltaTime;
+        }
+        else
+        {
+            driftTimer = 0f;
+        }
+
+        HandleDriftSparks(drifting);
     }
 
     void HandleDriftVisuals()
@@ -227,39 +245,66 @@ public class CarMotor : MonoBehaviour
         wheel.sidewaysFriction = sidewaysFriction;
     }
 
-    bool IsWheelSliding(WheelCollider wheel)
+    float GetWheelSlip(WheelCollider wheel)
     {
         if (wheel == null)
-            return false;
+            return 0f;
 
         WheelHit hit;
 
         if (wheel.GetGroundHit(out hit))
-            return Mathf.Abs(hit.sidewaysSlip) > driftSlipThreshold;
+            return Mathf.Abs(hit.sidewaysSlip);
 
-        return false;
+        return 0f;
     }
 
-    void HandleDriftSmoke(bool drifting)
+    void HandleDriftSparks(bool drifting)
     {
-        bool leftSlide = IsWheelSliding(wheel3);
-        bool rightSlide = IsWheelSliding(wheel4);
+        float leftSlip = GetWheelSlip(wheel3);
+        float rightSlip = GetWheelSlip(wheel4);
 
-        if (drifting && (leftSlide || rightSlide))
+        float strongestSlip = Mathf.Max(leftSlip, rightSlip);
+
+        float sparkStrength = Mathf.Clamp01((strongestSlip - driftSlipThreshold) * 4f);
+
+        bool shouldSpark = drifting && sparkStrength > 0.05f;
+
+        UpdateSparkParticle(driftSmokeLeft, shouldSpark, sparkStrength);
+        UpdateSparkParticle(driftSmokeRight, shouldSpark, sparkStrength);
+    }
+
+    void UpdateSparkParticle(ParticleSystem sparkSystem, bool shouldSpark, float strength)
+    {
+        if (sparkSystem == null)
+            return;
+
+        var emission = sparkSystem.emission;
+        var main = sparkSystem.main;
+
+        emission.rateOverTime = maxSparkEmission * strength;
+
+        if (driftTimer < 1f)
         {
-            if (driftSmokeLeft != null && !driftSmokeLeft.isPlaying)
-                driftSmokeLeft.Play();
-
-            if (driftSmokeRight != null && !driftSmokeRight.isPlaying)
-                driftSmokeRight.Play();
+            main.startColor = weakDriftColor; // blue
+        }
+        else if (driftTimer < 2f)
+        {
+            main.startColor = mediumDriftColor; // orange
         }
         else
         {
-            if (driftSmokeLeft != null && driftSmokeLeft.isPlaying)
-                driftSmokeLeft.Stop();
+            main.startColor = strongDriftColor; // purple
+        }
 
-            if (driftSmokeRight != null && driftSmokeRight.isPlaying)
-                driftSmokeRight.Stop();
+        if (shouldSpark)
+        {
+            if (!sparkSystem.isPlaying)
+                sparkSystem.Play();
+        }
+        else
+        {
+            if (sparkSystem.isPlaying)
+                sparkSystem.Stop();
         }
     }
 }
