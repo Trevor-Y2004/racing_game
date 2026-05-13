@@ -8,22 +8,21 @@ public class CheckpointEffect : MonoBehaviour
 
     private bool activated = false;
 
-    private void OnTriggerEnter(Collider other)
+    public void PlayEffect()
     {
-        if (activated)
-            return;
+        if (activated) return;
 
-        PlayerCheckpoint player = other.GetComponentInParent<PlayerCheckpoint>();
+        activated = true;
 
-        if (player != null && player.CompareTag("Player"))
-        {
-            activated = true;
+        if (animator != null)
+            animator.SetTrigger(animationTriggerName);
 
-            if (animator != null)
-                animator.SetTrigger(animationTriggerName);
+        if (audioSource != null)
+            audioSource.Play();
+    }
 
-            if (audioSource != null)
-                audioSource.Play();
-        }
+    public void ResetEffect()
+    {
+        activated = false;
     }
 }

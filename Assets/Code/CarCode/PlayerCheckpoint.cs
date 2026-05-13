@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerCheckpoint : MonoBehaviour
 {
     private Transform currentCheckpoint;
+    private CheckpointEffect currentCheckpointEffect;
 
     [SerializeField] private Transform initialSpawnPoint;
 
@@ -12,9 +13,16 @@ public class PlayerCheckpoint : MonoBehaviour
         Respawn();
     }
 
-    public void SetCheckpoint(Transform checkpoint)
+    public void SetCheckpoint(Transform checkpoint, CheckpointEffect checkpointEffect)
     {
+        if (currentCheckpointEffect != null && currentCheckpointEffect != checkpointEffect)
+        {
+            currentCheckpointEffect.ResetEffect();
+        }
+
         currentCheckpoint = checkpoint;
+        currentCheckpointEffect = checkpointEffect;
+
         Debug.Log("Checkpoint set: " + checkpoint.name);
     }
 
