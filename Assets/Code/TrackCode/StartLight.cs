@@ -3,11 +3,18 @@ using TMPro;
 
 public class StartLight : MonoBehaviour
 {
-    public Light startLight;
+    [Header("Lights")]
+    public Light light1;
+    public Light light2;
+    public Light light3;
+
+    [Header("UI")]
     public TextMeshProUGUI countdownText;
 
+    [Header("Cars")]
     public CarMotor[] carControllers;
 
+    [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip beepLow;
     public AudioClip beepHigh;
@@ -15,17 +22,22 @@ public class StartLight : MonoBehaviour
     private float timer = 0f;
     private bool started = false;
 
-    private bool beep1Played = false;
-    private bool beep2Played = false;
-    private bool beep3Played = false;
+    private bool step1 = false;
+    private bool step2 = false;
+    private bool step3 = false;
+    private bool step4 = false;
 
     void Start()
     {
         SetCarsEnabled(false);
 
-        startLight.color = Color.red;
-        startLight.enabled = false;
-        countdownText.text = "GET READY";
+        // Turn off lights initially
+        SetLight(light1, false, Color.red);
+        SetLight(light2, false, Color.red);
+        SetLight(light3, false, Color.red);
+
+        if (countdownText != null)
+            countdownText.text = "GET READY";
     }
 
     void Update()
@@ -34,75 +46,94 @@ public class StartLight : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (timer >= 1f && !beep1Played)
+        // First beep
+        if (timer >= 1f && !step1)
         {
-            FlashLight();
-            audioSource.PlayOneShot(beepLow);
-            beep1Played = true;
+            ActivateLight(light1, Color.red);
+            PlayBeepLow();
+            step1 = true;
         }
 
-        if (timer >= 2f && !beep2Played)
+        // Second beep
+        if (timer >= 2f && !step2)
         {
-            FlashLight();
-            audioSource.PlayOneShot(beepLow);
-            beep2Played = true;
+            ActivateLight(light2, Color.red);
+            PlayBeepLow();
+            step2 = true;
         }
 
-        if (timer >= 3f && !beep3Played)
+        // Third beep
+        if (timer >= 3f && !step3)
         {
-            FlashLight();
-            audioSource.PlayOneShot(beepLow);
-            beep3Played = true;
+            ActivateLight(light3, Color.red);
+            PlayBeepLow();
+            step3 = true;
         }
 
-        if (timer >= 4f && !started)
+        // Final beep (GO)
+        if (timer >= 4f && !step4)
         {
             StartRace();
+            step4 = true;
         }
     }
 
-    void FlashLight()
+    void ActivateLight(Light light, Color color)
     {
-        startLight.color = Color.red;
-        startLight.enabled = true;
-        Invoke(nameof(TurnLightOff), 0.2f);
+        if (light == null) return;
+
+        light.color = color;
+        light.enabled = true;
     }
 
-    void TurnLightOff()
+    void SetLight(Light light, bool state, Color color)
     {
-        startLight.enabled = false;
+        if (light == null) return;
+
+        light.enabled = state;
+        light.color = color;
+    }
+
+    void PlayBeepLow()
+    {
+        if (audioSource != null && beepLow != null)
+            audioSource.PlayOneShot(beepLow);
+    }
+
+    void PlayBeepHigh()
+    {
+        if (audioSource != null && beepHigh != null)
+            audioSource.PlayOneShot(beepHigh);
     }
 
     void StartRace()
     {
         started = true;
 
-        audioSource.PlayOneShot(beepHigh);
+        PlayBeepHigh();
 
-        startLight.enabled = true;
-        startLight.color = Color.green;
+        // Turn ALL lights green
+        SetLight(light1, true, Color.green);
+        SetLight(light2, true, Color.green);
+        SetLight(light3, true, Color.green);
 
-        countdownText.text = "GO!";
+        if (countdownText != null)
+            countdownText.text = "GO!";
 
         SetCarsEnabled(true);
 
-        foreach (CarMotor carController in carControllers)
+        // Start race timers (player + AI)
+        foreach (CarMotor car in carControllers)
         {
-            if (carController != null)
+            if (car != null)
             {
-                // Player
-                LapCounter lap = carController.GetComponent<LapCounter>();
+                LapCounter lap = car.GetComponent<LapCounter>();
                 if (lap != null)
-                {
                     lap.StartRace();
-                }
 
-                // AI
-                AILapCounter aiLap = carController.GetComponent<AILapCounter>();
+                AILapCounter aiLap = car.GetComponent<AILapCounter>();
                 if (aiLap != null)
-                {
                     aiLap.StartRace();
-                }
             }
         }
 
@@ -111,16 +142,16 @@ public class StartLight : MonoBehaviour
 
     void SetCarsEnabled(bool enabled)
     {
-        foreach (CarMotor carController in carControllers)
+        foreach (CarMotor car in carControllers)
         {
-            if (carController != null)
-                carController.enabled = enabled;
+            if (car != null)
+                car.enabled = enabled;
         }
     }
 
     void ClearText()
     {
-        countdownText.text = "";
-        startLight.enabled = false;
+        if (countdownText != null)
+            countdownText.text = "";
     }
 }

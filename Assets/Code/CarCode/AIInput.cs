@@ -8,19 +8,19 @@ public class AIInput : MonoBehaviour
     public Transform player;
 
     [Header("Pathing")]
-    public float checkpointReachDistance = 12f;
+    public float checkpointReachDistance = 6f;
     public float lookAheadDistance = 8f;
 
     [Header("Racing Lines")]
-    public float laneWidth = 4f;
+    public float laneWidth = 1.5f;
     public float racingLineOffset = 0f;
-    public bool randomizeRacingLine = true;
+    public bool randomizeRacingLine = false;
 
     [Header("AI Driving")]
     public float throttleAmount = 1f;
-    public float cornerSlowdownAngle = 40f;
-    public float sharpCornerSlowdown = 0.55f;
-    public float driftAngle = 35f;
+    public float cornerSlowdownAngle = 25f;
+    public float sharpCornerSlowdown = 0.35f;
+    public float driftAngle = 45f;
 
     [Header("Rubberbanding")]
     public bool useRubberbanding = true;
@@ -62,7 +62,12 @@ public class AIInput : MonoBehaviour
         Vector3 directionToTarget = targetPosition - transform.position;
         Vector3 localTarget = transform.InverseTransformPoint(targetPosition);
 
-        float steer = Mathf.Clamp(localTarget.x / Mathf.Max(localTarget.magnitude, 0.01f), -1f, 1f);
+        // 🔧 TIGHTER STEERING
+        float steer = Mathf.Clamp(
+            localTarget.x / Mathf.Max(Mathf.Abs(localTarget.z), 1f),
+            -1f,
+            1f
+        );
 
         if (useObstacleAvoidance)
         {
@@ -87,7 +92,8 @@ public class AIInput : MonoBehaviour
 
         carMotor.SetInputs(steer, throttle, drift, brake);
 
-        if (Vector3.Distance(transform.position, checkpoint.position) < checkpointReachDistance)
+        // 🔥 SMART CHECKPOINT ADVANCE
+        if (ShouldAdvanceCheckpoint(checkpoint))
         {
             GoToNextCheckpoint();
         }
@@ -118,6 +124,23 @@ public class AIInput : MonoBehaviour
 
         if (randomizeRacingLine)
             racingLineOffset = Random.Range(-1f, 1f);
+    }
+
+    // 🔥 NEW: prevents circling / missing checkpoints
+    bool ShouldAdvanceCheckpoint(Transform checkpoint)
+    {
+        float distance = Vector3.Distance(transform.position, checkpoint.position);
+
+        if (distance < checkpointReachDistance)
+            return true;
+
+        Vector3 toCheckpoint = checkpoint.position - transform.position;
+
+        // If checkpoint is behind us → move on
+        if (Vector3.Dot(transform.forward, toCheckpoint.normalized) < -0.2f)
+            return true;
+
+        return false;
     }
 
     float GetRubberbandMultiplier()
