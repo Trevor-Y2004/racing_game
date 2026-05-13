@@ -6,7 +6,8 @@ public class StartLight : MonoBehaviour
     public Light startLight;
     public LapCounter lapCounter;
     public TextMeshProUGUI countdownText;
-    public car carController;
+
+    public CarMotor[] carControllers;
 
     public AudioSource audioSource;
     public AudioClip beepLow;
@@ -21,7 +22,8 @@ public class StartLight : MonoBehaviour
 
     void Start()
     {
-        carController.enabled = false;
+        SetCarsEnabled(false);
+
         startLight.color = Color.red;
         startLight.enabled = false;
         countdownText.text = "GET READY";
@@ -83,10 +85,20 @@ public class StartLight : MonoBehaviour
 
         countdownText.text = "GO!";
 
-        carController.enabled = true;
+        SetCarsEnabled(true);
+
         lapCounter.StartRace();
 
         Invoke(nameof(ClearText), 1f);
+    }
+
+    void SetCarsEnabled(bool enabled)
+    {
+        foreach (CarMotor carController in carControllers)
+        {
+            if (carController != null)
+                carController.enabled = enabled;
+        }
     }
 
     void ClearText()

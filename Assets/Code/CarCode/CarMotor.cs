@@ -1,30 +1,30 @@
 using UnityEngine;
 using TMPro;
 
-public class car : MonoBehaviour
+public class CarMotor : MonoBehaviour
 {
+    [Header("Car Parts")]
     public Rigidbody rigid;
 
-    public WheelCollider wheel1; // front Left
+    public WheelCollider wheel1; // front left
     public WheelCollider wheel2; // front right
-    public WheelCollider wheel3; // back left
-    public WheelCollider wheel4; // back right
+    public WheelCollider wheel3; // rear left
+    public WheelCollider wheel4; // rear right
 
+    [Header("Driving")]
     public float drivespeed = 1200f;
     public float steerspeed = 55f;
 
+    [Header("UI / Camera")]
     public TextMeshProUGUI speedText;
-    public bool isGliding = false;
     public LapCounter lapCounter;
     public Camera carCamera;
-
     public float normalFOV = 60f;
     public float boostFOV = 80f;
     public float fovSpeed = 5f;
-    private float targetFOV;
 
-    public KeyCode driftKey = KeyCode.Space;
-
+    [Header("Drifting")]
+    public bool isGliding = false;
     public float normalSidewaysStiffness = 1f;
     public float driftSidewaysStiffness = 0.4f;
     public float driftSteerMultiplier = 1.1f;
@@ -32,16 +32,23 @@ public class car : MonoBehaviour
     public float normalTurnDamping = 0.85f;
     public float driftTurnAssist = 0.8f;
 
-    // 💨 DRIFT SMOKE
+    [Header("Drift Smoke")]
     public ParticleSystem driftSmokeLeft;
     public ParticleSystem driftSmokeRight;
     public float driftSlipThreshold = 0.3f;
 
-    float horizontalInput;
-    float verticalInput;
+    private float horizontalInput;
+    private float verticalInput;
+    private bool driftInput;
+
+    public float CurrentSteerInput => horizontalInput;
+    private float targetFOV;
 
     void Start()
     {
+        if (rigid == null)
+            rigid = GetComponent<Rigidbody>();
+
         if (rigid != null)
             rigid.centerOfMass = new Vector3(0, -0.3f, 0);
 
@@ -53,9 +60,6 @@ public class car : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-
         if (lapCounter != null && lapCounter.raceStarted && rigid != null && speedText != null)
         {
             float speed = rigid.linearVelocity.magnitude * 2.237f;
@@ -72,10 +76,17 @@ public class car : MonoBehaviour
         }
     }
 
+    public void SetInputs(float steer, float throttle, bool drift)
+    {
+        horizontalInput = Mathf.Clamp(steer, -1f, 1f);
+        verticalInput = Mathf.Clamp(throttle, -1f, 1f);
+        driftInput = drift;
+    }
+
     public void TriggerBoostFOV()
     {
         targetFOV = boostFOV;
-        Invoke("ResetFOV", 1f);
+        Invoke(nameof(ResetFOV), 1f);
     }
 
     void ResetFOV()
@@ -88,7 +99,7 @@ public class car : MonoBehaviour
         if (rigid == null || wheel1 == null || wheel2 == null || wheel3 == null || wheel4 == null)
             return;
 
-        bool drifting = Input.GetKey(driftKey);
+        bool drifting = driftInput;
 
         float motor = verticalInput * drivespeed;
 
@@ -126,7 +137,6 @@ public class car : MonoBehaviour
             rigid.angularVelocity = angularVel;
         }
 
-        // 💨 DRIFT SMOKE SYSTEM
         HandleDriftSmoke(drifting);
     }
 
@@ -136,7 +146,6 @@ public class car : MonoBehaviour
         {
             SetSidewaysStiffness(wheel1, normalSidewaysStiffness);
             SetSidewaysStiffness(wheel2, normalSidewaysStiffness);
-
             SetSidewaysStiffness(wheel3, driftSidewaysStiffness);
             SetSidewaysStiffness(wheel4, driftSidewaysStiffness);
         }
@@ -151,25 +160,27 @@ public class car : MonoBehaviour
 
     void SetSidewaysStiffness(WheelCollider wheel, float stiffness)
     {
-        if (wheel == null) return;
+        if (wheel == null)
+            return;
 
         WheelFrictionCurve sidewaysFriction = wheel.sidewaysFriction;
         sidewaysFriction.stiffness = stiffness;
         wheel.sidewaysFriction = sidewaysFriction;
     }
 
-    // 💨 CHECK IF WHEEL IS SLIPPING
     bool IsWheelSliding(WheelCollider wheel)
     {
+        if (wheel == null)
+            return false;
+
         WheelHit hit;
+
         if (wheel.GetGroundHit(out hit))
-        {
             return Mathf.Abs(hit.sidewaysSlip) > driftSlipThreshold;
-        }
+
         return false;
     }
 
-    // 💨 DRIFT SMOKE CONTROLLER
     void HandleDriftSmoke(bool drifting)
     {
         bool leftSlide = IsWheelSliding(wheel3);

@@ -13,7 +13,9 @@ public class CheckpointEffect : MonoBehaviour
         if (activated)
             return;
 
-        if (other.CompareTag("Player"))
+        PlayerCheckpoint player = other.GetComponentInParent<PlayerCheckpoint>();
+
+        if (player != null && player.CompareTag("Player"))
         {
             activated = true;
 
