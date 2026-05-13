@@ -6,12 +6,15 @@ public class AxeBlade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Rigidbody rb = other.GetComponentInParent<Rigidbody>();
-        if (rb != null)
+        if (other.CompareTag("Player"))
         {
-            Vector3 knockDirection = other.transform.position - transform.position;
-            knockDirection.Normalize();
-            rb.AddForce(knockDirection * knockForce, ForceMode.Impulse);
+            Rigidbody rb = other.GetComponentInParent<Rigidbody>();
+            if (rb != null)
+            {
+                Vector3 knockDirection = other.transform.position - transform.position;
+                knockDirection.Normalize();
+                rb.AddForce(knockDirection * knockForce, ForceMode.Impulse);
+            }
         }
     }
 }

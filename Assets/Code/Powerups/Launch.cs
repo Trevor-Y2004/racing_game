@@ -29,7 +29,7 @@ public class Launch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!used)
+        if (!used && other.CompareTag("Player"))
         {
             Rigidbody rb = other.GetComponentInParent<Rigidbody>();
             if (rb != null)

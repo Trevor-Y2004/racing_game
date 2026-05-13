@@ -8,12 +8,14 @@ public class OilSpill : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Rigidbody rb = other.GetComponentInParent<Rigidbody>();
-        if (rb != null)
+        if (other.CompareTag("Player"))
         {
-            // Pick one direction at the start and keep it
-            float direction = Random.value > 0.5f ? 1f : -1f;
-            StartCoroutine(Slip(rb, direction));
+            Rigidbody rb = other.GetComponentInParent<Rigidbody>();
+            if (rb != null)
+            {
+                float direction = Random.value > 0.5f ? 1f : -1f;
+                StartCoroutine(Slip(rb, direction));
+            }
         }
     }
 

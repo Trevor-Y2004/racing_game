@@ -9,10 +9,13 @@ public class DinoAI : MonoBehaviour
     private Rigidbody rb;
 
     void Start()
+{
+    rb = GetComponent<Rigidbody>();
+    if (waypoints.Length > 0)
     {
-        rb = GetComponent<Rigidbody>();
+        transform.position = waypoints[0].position;
     }
-
+}
     void FixedUpdate()
     {
         if (waypoints.Length == 0) return;
