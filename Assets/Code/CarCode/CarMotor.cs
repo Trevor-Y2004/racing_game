@@ -50,7 +50,7 @@ public class CarMotor : MonoBehaviour
             rigid = GetComponent<Rigidbody>();
 
         if (rigid != null)
-            rigid.centerOfMass = new Vector3(0, -0.3f, 0);
+            rigid.centerOfMass = new Vector3(0, -1f, 0);
 
         if (speedText != null)
             speedText.text = "";

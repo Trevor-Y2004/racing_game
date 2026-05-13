@@ -17,8 +17,8 @@ public class LapCounter : MonoBehaviour
 
     void Start()
     {
-        lapText.text = "";
-        timerText.text = "";
+        lapText.text = "Lap 1/" + totalLaps;
+        timerText.text = "00:00:00";
     }
 
     public void StartRace()
