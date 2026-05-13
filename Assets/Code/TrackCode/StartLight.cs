@@ -8,14 +8,23 @@ public class StartLight : MonoBehaviour
     public TextMeshProUGUI countdownText;
     public car carController;
 
+    public AudioSource audioSource;
+    public AudioClip beepLow;
+    public AudioClip beepHigh;
+
     private float timer = 0f;
     private bool started = false;
+
+    private bool beep1Played = false;
+    private bool beep2Played = false;
+    private bool beep3Played = false;
 
     void Start()
     {
         carController.enabled = false;
         startLight.color = Color.red;
-        startLight.enabled = true;
+        startLight.enabled = false;
+        countdownText.text = "GET READY";
     }
 
     void Update()
@@ -24,23 +33,60 @@ public class StartLight : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        // Flash red for 3 seconds
-        if (timer < 3f)
+        if (timer >= 1f && !beep1Played)
         {
-            startLight.enabled = Mathf.Sin(timer * 5f) > 0;
-            countdownText.text = "GET READY";
+            FlashLight();
+            audioSource.PlayOneShot(beepLow);
+            beep1Played = true;
         }
-        // Turn green and GO
-        else if (timer >= 3f && !started)
+
+        if (timer >= 2f && !beep2Played)
         {
-            startLight.enabled = true;
-            startLight.color = Color.green;
-            countdownText.text = "GO!";
-            carController.enabled = true;
-            lapCounter.StartRace();
-            started = true;
-            Invoke("ClearText", 1f);
+            FlashLight();
+            audioSource.PlayOneShot(beepLow);
+            beep2Played = true;
         }
+
+        if (timer >= 3f && !beep3Played)
+        {
+            FlashLight();
+            audioSource.PlayOneShot(beepLow);
+            beep3Played = true;
+        }
+
+        if (timer >= 4f && !started)
+        {
+            StartRace();
+        }
+    }
+
+    void FlashLight()
+    {
+        startLight.color = Color.red;
+        startLight.enabled = true;
+        Invoke(nameof(TurnLightOff), 0.2f);
+    }
+
+    void TurnLightOff()
+    {
+        startLight.enabled = false;
+    }
+
+    void StartRace()
+    {
+        started = true;
+
+        audioSource.PlayOneShot(beepHigh);
+
+        startLight.enabled = true;
+        startLight.color = Color.green;
+
+        countdownText.text = "GO!";
+
+        carController.enabled = true;
+        lapCounter.StartRace();
+
+        Invoke(nameof(ClearText), 1f);
     }
 
     void ClearText()
