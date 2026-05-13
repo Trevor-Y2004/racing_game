@@ -5,10 +5,10 @@ public class car : MonoBehaviour
 {
     public Rigidbody rigid;
 
-    public WheelCollider wheel1; //front Left
-    public WheelCollider wheel2; //front right
-    public WheelCollider wheel3; //back left
-    public WheelCollider wheel4; //back right
+    public WheelCollider wheel1; // front Left
+    public WheelCollider wheel2; // front right
+    public WheelCollider wheel3; // back left
+    public WheelCollider wheel4; // back right
 
     public float drivespeed = 1200f;
     public float steerspeed = 55f;
@@ -17,18 +17,25 @@ public class car : MonoBehaviour
     public bool isGliding = false;
     public LapCounter lapCounter;
     public Camera carCamera;
+
     public float normalFOV = 60f;
     public float boostFOV = 80f;
     public float fovSpeed = 5f;
     private float targetFOV;
 
     public KeyCode driftKey = KeyCode.Space;
+
     public float normalSidewaysStiffness = 1f;
     public float driftSidewaysStiffness = 0.4f;
     public float driftSteerMultiplier = 1.1f;
     public float minSpeedForDriftBoost = 8f;
     public float normalTurnDamping = 0.85f;
     public float driftTurnAssist = 0.8f;
+
+    // 💨 DRIFT SMOKE
+    public ParticleSystem driftSmokeLeft;
+    public ParticleSystem driftSmokeRight;
+    public float driftSlipThreshold = 0.3f;
 
     float horizontalInput;
     float verticalInput;
@@ -57,7 +64,11 @@ public class car : MonoBehaviour
 
         if (carCamera != null)
         {
-            carCamera.fieldOfView = Mathf.Lerp(carCamera.fieldOfView, targetFOV, fovSpeed * Time.deltaTime);
+            carCamera.fieldOfView = Mathf.Lerp(
+                carCamera.fieldOfView,
+                targetFOV,
+                fovSpeed * Time.deltaTime
+            );
         }
     }
 
@@ -82,14 +93,10 @@ public class car : MonoBehaviour
         float motor = verticalInput * drivespeed;
 
         if (drifting)
-        {
             motor *= 1.2f;
-        }
 
         if (rigid.linearVelocity.magnitude < 5f)
-        {
             motor *= 2f;
-        }
 
         wheel1.motorTorque = 0;
         wheel2.motorTorque = 0;
@@ -99,9 +106,7 @@ public class car : MonoBehaviour
         float currentSteerSpeed = steerspeed;
 
         if (drifting && rigid.linearVelocity.magnitude > minSpeedForDriftBoost)
-        {
             currentSteerSpeed *= driftSteerMultiplier;
-        }
 
         wheel1.steerAngle = currentSteerSpeed * horizontalInput;
         wheel2.steerAngle = currentSteerSpeed * horizontalInput;
@@ -120,6 +125,9 @@ public class car : MonoBehaviour
             angularVel.y *= normalTurnDamping;
             rigid.angularVelocity = angularVel;
         }
+
+        // 💨 DRIFT SMOKE SYSTEM
+        HandleDriftSmoke(drifting);
     }
 
     void HandleDrift(bool drifting)
@@ -143,11 +151,45 @@ public class car : MonoBehaviour
 
     void SetSidewaysStiffness(WheelCollider wheel, float stiffness)
     {
-        if (wheel == null)
-            return;
+        if (wheel == null) return;
 
         WheelFrictionCurve sidewaysFriction = wheel.sidewaysFriction;
         sidewaysFriction.stiffness = stiffness;
         wheel.sidewaysFriction = sidewaysFriction;
+    }
+
+    // 💨 CHECK IF WHEEL IS SLIPPING
+    bool IsWheelSliding(WheelCollider wheel)
+    {
+        WheelHit hit;
+        if (wheel.GetGroundHit(out hit))
+        {
+            return Mathf.Abs(hit.sidewaysSlip) > driftSlipThreshold;
+        }
+        return false;
+    }
+
+    // 💨 DRIFT SMOKE CONTROLLER
+    void HandleDriftSmoke(bool drifting)
+    {
+        bool leftSlide = IsWheelSliding(wheel3);
+        bool rightSlide = IsWheelSliding(wheel4);
+
+        if (drifting && (leftSlide || rightSlide))
+        {
+            if (driftSmokeLeft != null && !driftSmokeLeft.isPlaying)
+                driftSmokeLeft.Play();
+
+            if (driftSmokeRight != null && !driftSmokeRight.isPlaying)
+                driftSmokeRight.Play();
+        }
+        else
+        {
+            if (driftSmokeLeft != null && driftSmokeLeft.isPlaying)
+                driftSmokeLeft.Stop();
+
+            if (driftSmokeRight != null && driftSmokeRight.isPlaying)
+                driftSmokeRight.Stop();
+        }
     }
 }
