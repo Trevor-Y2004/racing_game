@@ -5,14 +5,15 @@ public class CarMotor : MonoBehaviour
 {
     [Header("Car Parts")]
     public Rigidbody rigid;
+    public Transform carVisual;
 
-    public WheelCollider wheel1; // front left
-    public WheelCollider wheel2; // front right
-    public WheelCollider wheel3; // rear left
-    public WheelCollider wheel4; // rear right
+    public WheelCollider wheel1;
+    public WheelCollider wheel2;
+    public WheelCollider wheel3;
+    public WheelCollider wheel4;
 
     [Header("Driving")]
-    public float drivespeed = 2500f;
+    public float drivespeed = 1200f;
     public float steerspeed = 55f;
 
     [Header("UI / Camera")]
@@ -33,8 +34,13 @@ public class CarMotor : MonoBehaviour
     public float driftTurnAssist = 0.8f;
 
     [Header("Drift Momentum")]
-    public float lateralGripDuringDrift = 0.96f;
-    public float forwardMomentumDuringDrift = 1.002f;
+    public float lateralGripDuringDrift = 0.94f;
+    public float forwardMomentumDuringDrift = 1.005f;
+
+    [Header("Drift Visuals")]
+    public float driftVisualTilt = 10f;
+    public float driftVisualYaw = 8f;
+    public float driftVisualSpeed = 6f;
 
     [Header("Drift Smoke")]
     public ParticleSystem driftSmokeLeft;
@@ -42,7 +48,7 @@ public class CarMotor : MonoBehaviour
     public float driftSlipThreshold = 0.3f;
 
     [Header("Braking")]
-    public float brakeForce = 1800f;
+    public float brakeForce = 600f;
 
     private float horizontalInput;
     private float verticalInput;
@@ -82,6 +88,8 @@ public class CarMotor : MonoBehaviour
                 fovSpeed * Time.deltaTime
             );
         }
+
+        HandleDriftVisuals();
     }
 
     public void SetInputs(float steer, float throttle, bool drift, bool brake)
@@ -118,7 +126,6 @@ public class CarMotor : MonoBehaviour
         if (rigid.linearVelocity.magnitude < 5f)
             motor *= 2f;
 
-        // Reduce throttle when braking
         if (brakeInput)
             motor *= 0.2f;
 
@@ -137,22 +144,17 @@ public class CarMotor : MonoBehaviour
 
         HandleDrift(drifting);
 
-        // Rigidbody-based braking (no wheel lock)
         if (brakeInput)
         {
             float brakeStrength = brakeForce * 0.00005f;
             rigid.linearVelocity *= 1f - (brakeStrength * Time.fixedDeltaTime);
         }
 
-        // 🔥 Drift momentum control (THIS FIXES YOUR ISSUE)
         if (drifting)
         {
             Vector3 localVelocity = transform.InverseTransformDirection(rigid.linearVelocity);
 
-            // Reduce sideways slide
             localVelocity.x *= lateralGripDuringDrift;
-
-            // Preserve forward momentum
             localVelocity.z *= forwardMomentumDuringDrift;
 
             rigid.linearVelocity = transform.TransformDirection(localVelocity);
@@ -172,6 +174,29 @@ public class CarMotor : MonoBehaviour
         }
 
         HandleDriftSmoke(drifting);
+    }
+
+    void HandleDriftVisuals()
+    {
+        if (carVisual == null)
+            return;
+
+        float targetTilt = 0f;
+        float targetYaw = 0f;
+
+        if (driftInput && Mathf.Abs(horizontalInput) > 0.1f)
+        {
+            targetTilt = -horizontalInput * driftVisualTilt;
+            targetYaw = horizontalInput * driftVisualYaw;
+        }
+
+        Quaternion targetRotation = Quaternion.Euler(0f, targetYaw, targetTilt);
+
+        carVisual.localRotation = Quaternion.Lerp(
+            carVisual.localRotation,
+            targetRotation,
+            driftVisualSpeed * Time.deltaTime
+        );
     }
 
     void HandleDrift(bool drifting)
