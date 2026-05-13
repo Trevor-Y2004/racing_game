@@ -83,8 +83,9 @@ public class AIInput : MonoBehaviour
         throttle = Mathf.Clamp(throttle, -1f, 1f);
 
         bool drift = angleToTarget > driftAngle;
+        bool brake = false;
 
-        carMotor.SetInputs(steer, throttle, drift);
+        carMotor.SetInputs(steer, throttle, drift, brake);
 
         if (Vector3.Distance(transform.position, checkpoint.position) < checkpointReachDistance)
         {

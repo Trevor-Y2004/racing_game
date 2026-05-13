@@ -4,6 +4,7 @@ public class PlayerInput : MonoBehaviour
 {
     public CarMotor carMotor;
     public KeyCode driftKey = KeyCode.Space;
+    public KeyCode brakeKey = KeyCode.LeftShift; // NEW
 
     void Start()
     {
@@ -19,7 +20,8 @@ public class PlayerInput : MonoBehaviour
         float steer = Input.GetAxis("Horizontal");
         float throttle = Input.GetAxis("Vertical");
         bool drift = Input.GetKey(driftKey);
+        bool brake = Input.GetKey(brakeKey); // NEW
 
-        carMotor.SetInputs(steer, throttle, drift);
+        carMotor.SetInputs(steer, throttle, drift, brake);
     }
 }

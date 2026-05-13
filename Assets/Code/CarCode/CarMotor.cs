@@ -12,7 +12,7 @@ public class CarMotor : MonoBehaviour
     public WheelCollider wheel4; // rear right
 
     [Header("Driving")]
-    public float drivespeed = 1200f;
+    public float drivespeed = 2500f;
     public float steerspeed = 55f;
 
     [Header("UI / Camera")]
@@ -32,14 +32,22 @@ public class CarMotor : MonoBehaviour
     public float normalTurnDamping = 0.85f;
     public float driftTurnAssist = 0.8f;
 
+    [Header("Drift Momentum")]
+    public float lateralGripDuringDrift = 0.96f;
+    public float forwardMomentumDuringDrift = 1.002f;
+
     [Header("Drift Smoke")]
     public ParticleSystem driftSmokeLeft;
     public ParticleSystem driftSmokeRight;
     public float driftSlipThreshold = 0.3f;
 
+    [Header("Braking")]
+    public float brakeForce = 1800f;
+
     private float horizontalInput;
     private float verticalInput;
     private bool driftInput;
+    private bool brakeInput;
 
     public float CurrentSteerInput => horizontalInput;
     private float targetFOV;
@@ -76,11 +84,12 @@ public class CarMotor : MonoBehaviour
         }
     }
 
-    public void SetInputs(float steer, float throttle, bool drift)
+    public void SetInputs(float steer, float throttle, bool drift, bool brake)
     {
         horizontalInput = Mathf.Clamp(steer, -1f, 1f);
         verticalInput = Mathf.Clamp(throttle, -1f, 1f);
         driftInput = drift;
+        brakeInput = brake;
     }
 
     public void TriggerBoostFOV()
@@ -109,6 +118,10 @@ public class CarMotor : MonoBehaviour
         if (rigid.linearVelocity.magnitude < 5f)
             motor *= 2f;
 
+        // Reduce throttle when braking
+        if (brakeInput)
+            motor *= 0.2f;
+
         wheel1.motorTorque = 0;
         wheel2.motorTorque = 0;
         wheel3.motorTorque = motor;
@@ -123,6 +136,27 @@ public class CarMotor : MonoBehaviour
         wheel2.steerAngle = currentSteerSpeed * horizontalInput;
 
         HandleDrift(drifting);
+
+        // Rigidbody-based braking (no wheel lock)
+        if (brakeInput)
+        {
+            float brakeStrength = brakeForce * 0.00005f;
+            rigid.linearVelocity *= 1f - (brakeStrength * Time.fixedDeltaTime);
+        }
+
+        // 🔥 Drift momentum control (THIS FIXES YOUR ISSUE)
+        if (drifting)
+        {
+            Vector3 localVelocity = transform.InverseTransformDirection(rigid.linearVelocity);
+
+            // Reduce sideways slide
+            localVelocity.x *= lateralGripDuringDrift;
+
+            // Preserve forward momentum
+            localVelocity.z *= forwardMomentumDuringDrift;
+
+            rigid.linearVelocity = transform.TransformDirection(localVelocity);
+        }
 
         if (drifting && Mathf.Abs(horizontalInput) > 0.1f)
         {
