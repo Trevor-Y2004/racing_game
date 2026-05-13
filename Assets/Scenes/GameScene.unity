@@ -20197,56 +20197,6 @@ PhysicsMaterial:
   m_Bounciness: 0
   m_FrictionCombine: 0
   m_BounceCombine: 0
---- !u!1 &706810908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 706810910}
-  - component: {fileID: 706810909}
-  m_Layer: 0
-  m_Name: MoonController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &706810909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706810908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6037ac9cc9f3cc888508b7caa05016, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CreateMoon
-  moonMaterial: {fileID: 2100000, guid: 7729c16ceefa7d8d5a2e2b01e733ebe3, type: 2}
-  moonPosition: {x: 0, y: 25, z: 60}
-  moonSize: 25
-  lightIntensity: 0.35
-  lightColor: {r: 1, g: 0.6509804, b: 0.85131186, a: 1}
-  lightRotation: {x: -100, y: -30, z: 0}
---- !u!4 &706810910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706810908}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1092.9786, y: 0, z: -945.03345}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &712164320
 GameObject:
   m_ObjectHideFlags: 0
@@ -56395,7 +56345,6 @@ SceneRoots:
   - {fileID: 1936174671}
   - {fileID: 403248037}
   - {fileID: 1455362357}
-  - {fileID: 706810910}
   - {fileID: 908410829}
   - {fileID: 2103374835}
   - {fileID: 1523304993}
